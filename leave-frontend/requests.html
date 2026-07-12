@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Leave Requests</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body class="dashboard-body">
+
+<div class="sidebar">
+
+<h2>LeaveHub</h2>
+
+<a href="admin.html"><i class="fa fa-chart-line"></i> Dashboard</a>
+
+<a href="employees.html"><i class="fa fa-users"></i> Employees</a>
+
+<a href="requests.html"><i class="fa fa-calendar-check"></i> Leave Requests</a>
+
+<a href="reports.html"><i class="fa fa-chart-pie"></i> Reports</a>
+<a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+
+<a href="index.html"><i class="fa fa-right-from-bracket"></i> Logout</a>
+
+</div>
+
+<div class="main-content">
+
+<div class="topbar">
+
+<h1>Leave Requests</h1>
+
+</div>
+
+<div class="recent">
+
+<input
+type="text"
+id="search"
+placeholder="Search Leave Type..."
+class="search-box"
+onkeyup="searchLeave()">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Employee ID</th>
+<th>Leave Type</th>
+<th>Start</th>
+<th>End</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="leaveTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/requests.js"></script>
+</body>
+
+</html>

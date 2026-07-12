@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Profile</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body class="dashboard-body">
+
+<div class="sidebar">
+
+<h2>LeaveHub</h2>
+
+<a href="employee.html"><i class="fa fa-house"></i> Dashboard</a>
+
+<a href="applyleave.html"><i class="fa fa-calendar-plus"></i> Apply Leave</a>
+
+<a href="history.html"><i class="fa fa-clock-rotate-left"></i> Leave History</a>
+
+<a href="profile.html"><i class="fa fa-user"></i> Profile</a>
+
+<a href="index.html"><i class="fa fa-right-from-bracket"></i> Logout</a>
+
+</div>
+
+<div class="main-content">
+
+<div class="topbar">
+<h1>👤 My Profile</h1>
+</div>
+
+<div class="profile-card">
+
+<div class="profile-image">
+
+<i class="fa-solid fa-circle-user"></i>
+
+</div>
+
+<div class="profile-form">
+
+<label>Name</label>
+<input type="text" id="name">
+
+<label>Email</label>
+<input type="email" id="email">
+
+<label>Department</label>
+<input type="text" id="department">
+
+<label>Role</label>
+<input type="text" id="role" readonly>
+<br><br><br>
+<button onclick="updateProfile()">
+Save Changes
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/profile.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Leave History</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body class="dashboard-body">
+
+<div class="sidebar">
+
+<h2>LeaveHub</h2>
+
+<a href="employee.html"><i class="fa fa-house"></i> Dashboard</a>
+
+<a href="applyleave.html"><i class="fa fa-calendar-plus"></i> Apply Leave</a>
+
+<a href="history.html"><i class="fa fa-clock-rotate-left"></i> Leave History</a>
+
+<a href="index.html"><i class="fa fa-right-from-bracket"></i> Logout</a>
+
+</div>
+
+<div class="main-content">
+
+<h1>My Leave History</h1>
+
+<input
+type="text"
+id="search"
+placeholder="Search Leave Type..."
+onkeyup="searchLeave()"
+class="search-box">
+
+<div class="recent">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Leave Type</th>
+
+<th>Start Date</th>
+
+<th>End Date</th>
+
+<th>Reason</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="historyBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script src="js/history.js"></script>
+
+</body>
+
+</html>

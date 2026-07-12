@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Apply Leave</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+
+<div class="leave-card">
+
+<h1>Apply Leave</h1>
+
+<p>Submit your leave request</p>
+
+<select id="leaveType">
+
+<option>Sick Leave</option>
+
+<option>Casual Leave</option>
+
+<option>Medical Leave</option>
+
+<option>Earned Leave</option>
+
+<option>Maternity Leave</option>
+
+</select>
+
+<input type="date" id="startDate">
+
+<input type="date" id="endDate">
+
+<textarea
+id="reason"
+placeholder="Reason for Leave"></textarea>
+
+<button onclick="applyLeave()">
+
+Submit Leave
+
+</button>
+
+<div class="bottom">
+
+<a href="employee.html">
+
+← Back to Dashboard
+
+</a>
+
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/applyleave.js"></script>
+
+</body>
+
+</html>
