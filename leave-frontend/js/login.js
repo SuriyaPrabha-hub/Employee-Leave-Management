@@ -4,8 +4,7 @@ const email=document.getElementById("email").value;
 
 const password=document.getElementById("password").value;
 
-fetch("http://localhost:8080/employees/login",{
-
+fetch("https://employee-leave-system-ajj1.onrender.com/employees/login",{
 method:"POST",
 
 headers:{
