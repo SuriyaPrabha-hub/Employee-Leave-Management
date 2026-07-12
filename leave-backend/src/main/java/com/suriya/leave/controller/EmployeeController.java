@@ -2,9 +2,10 @@ package com.suriya.leave.controller;
 
 import com.suriya.leave.entity.Employee;
 import com.suriya.leave.service.EmployeeService;
+import com.suriya.leave.dto.LoginRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.suriya.leave.dto.LoginRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,11 +18,13 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+
     // Add Employee
     @PostMapping
     public Employee addEmployee(@RequestBody Employee employee) {
         return employeeService.saveEmployee(employee);
     }
+
 
     // Get All Employees
     @GetMapping
@@ -29,44 +32,69 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
+
     // Get Employee By ID
-    @GetMapping("/{id}")
-    public Optional<Employee> getEmployeeById(@PathVariable Integer id) {
+    @GetMapping("/get/{id}")
+    public Optional<Employee> getEmployeeById(
+            @PathVariable Integer id) {
+
         return employeeService.getEmployeeById(id);
     }
 
+
     // Update Employee
-    @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable Integer id,
+    @PutMapping("/update/{id}")
+    public Employee updateEmployee(
+            @PathVariable Integer id,
             @RequestBody Employee employee) {
+
         return employeeService.updateEmployee(id, employee);
     }
 
+
     // Delete Employee
-    @DeleteMapping("/{id}")
-    public String deleteEmployee(@PathVariable Integer id) {
+    @DeleteMapping("/delete/{id}")
+    public String deleteEmployee(
+            @PathVariable Integer id) {
+
         employeeService.deleteEmployee(id);
+
         return "Employee Deleted Successfully";
     }
 
+
+    // Login Employee
     @PostMapping("/login")
-    public Employee login(@RequestBody LoginRequest request) {
+    public Employee login(
+            @RequestBody LoginRequest request) {
 
         return employeeService.login(
                 request.getEmail(),
-                request.getPassword());
+                request.getPassword()
+        );
     }
 
+
+    // Register Employee
     @PostMapping("/register")
-    public Employee register(@RequestBody Employee employee) {
+    public Employee register(
+            @RequestBody Employee employee) {
+
         employee.setRole("EMPLOYEE");
+
         return employeeService.saveEmployee(employee);
     }
+
+
+    // Change Password
     @PutMapping("/changePassword/{id}")
-public Employee changePassword(@PathVariable Integer id,
-                               @RequestBody Employee employee) {
+    public Employee changePassword(
+            @PathVariable Integer id,
+            @RequestBody Employee employee) {
 
-    return employeeService.changePassword(id, employee.getPassword());
-
-}
+        return employeeService.changePassword(
+                id,
+                employee.getPassword()
+        );
+    }
 }
