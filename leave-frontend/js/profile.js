@@ -2,7 +2,7 @@ let employeeId = localStorage.getItem("employeeId");
 
 window.onload = function () {
 
-    fetch("http://localhost:8080/employees/" + employeeId)
+  fetch("https://employee-leave-system-ajj1.onrender.com/employees/" + employeeId)
 
     .then(response => response.json())
 
@@ -29,7 +29,7 @@ function updateProfile(){
 
     };
 
-    fetch("http://localhost:8080/employees/" + employeeId,{
+ fetch("https://employee-leave-system-ajj1.onrender.com/employees/" + employeeId,{
 
         method:"PUT",
 
