@@ -26,8 +26,7 @@ function registerEmployee(){
 
     }
 
-    fetch("http://localhost:8080/employees/register",{
-
+ fetch("https://employee-leave-system-ajj1.onrender.com/employees/register",{
         method:"POST",
 
         headers:{
