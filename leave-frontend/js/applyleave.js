@@ -17,8 +17,7 @@ reason:document.getElementById("reason").value,
 status:"Pending"
 
 };
-
-fetch("http://localhost:8080/leave",{
+fetch("https://employee-leave-system-ajj1.onrender.com/leave", {
 
 method:"POST",
 
