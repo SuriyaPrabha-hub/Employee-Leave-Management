@@ -1,14 +1,12 @@
 let allEmployees = [];
 
-// Load Employees
 window.onload = function () {
     loadEmployees();
 };
 
-// Function to Load Employees
 function loadEmployees() {
 
-    fetch("http://localhost:8080/employees")
+    fetch("https://employee-leave-system-ajj1.onrender.com/employees")
         .then(response => response.json())
         .then(data => {
 
@@ -28,7 +26,6 @@ function loadEmployees() {
 
 }
 
-// Display Employees
 function displayEmployees(data) {
 
     let table = document.getElementById("employeeBody");
@@ -71,7 +68,6 @@ function displayEmployees(data) {
 
 }
 
-// Search Employee
 function searchEmployee() {
 
     let keyword = document.getElementById("search").value.toLowerCase();
@@ -90,7 +86,6 @@ function searchEmployee() {
 
 }
 
-// Delete Employee
 function deleteEmployee(id) {
 
     Swal.fire({
@@ -107,7 +102,7 @@ function deleteEmployee(id) {
 
         if (result.isConfirmed) {
 
-            fetch("http://localhost:8080/employees/" + id, {
+            fetch("https://employee-leave-system-ajj1.onrender.com/employees/" + id, {
 
                 method: "DELETE"
 
@@ -134,7 +129,6 @@ function deleteEmployee(id) {
 
 }
 
-// Export Excel
 function exportExcel() {
 
     const table = document.getElementById("employeeTable");
