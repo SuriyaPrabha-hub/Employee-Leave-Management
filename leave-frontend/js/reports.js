@@ -1,6 +1,6 @@
 window.onload = function () {
 
-    fetch("http://localhost:8080/leave")
+  fetch("https://employee-leave-system-ajj1.onrender.com/leave")
         .then(response => response.json())
         .then(data => {
 
