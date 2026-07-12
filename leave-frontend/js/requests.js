@@ -6,7 +6,7 @@ window.onload = function () {
 
 function loadLeaves() {
 
-    fetch("http://localhost:8080/leave")
+   fetch("https://employee-leave-system-ajj1.onrender.com/leave")
         .then(response => response.json())
         .then(data => {
 
@@ -101,7 +101,7 @@ function searchLeave() {
 
 function approveLeave(id) {
 
-    fetch("http://localhost:8080/leave/approve/" + id, {
+fetch("https://employee-leave-system-ajj1.onrender.com/leave/approve/" + id, {
         method: "PUT"
     })
        .then(() => {
@@ -122,7 +122,7 @@ function approveLeave(id) {
 
 function rejectLeave(id) {
 
-    fetch("http://localhost:8080/leave/reject/" + id, {
+fetch("https://employee-leave-system-ajj1.onrender.com/leave/reject/" + id, {
         method: "PUT"
     })
       .then(() => {
@@ -142,13 +142,13 @@ function rejectLeave(id) {
 }
 function pendingLeave(id){
 
-    fetch("http://localhost:8080/leave/pending/" + id, {
+   fetch("https://employee-leave-system-ajj1.onrender.com/leave/pending/" + id, {
         method: "PUT"
     })
     .then(() => {
 
     Swal.fire({
-        icon: "pending",
+        icon: "question",
         title: "Leave Pending",
         text: "The leave request has been pending.",
         confirmButtonColor: "#efca44"
