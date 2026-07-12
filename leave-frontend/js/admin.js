@@ -1,6 +1,6 @@
 window.onload=function(){
 
-fetch("http://localhost:8080/admin/dashboard")
+fetch("https://employee-leave-system-ajj1.onrender.com/admin/dashboard")
 
 .then(response=>response.json())
 
