@@ -15,8 +15,7 @@ function changePassword(){
 
         return;
     }
-
-    fetch("http://localhost:8080/employees/changePassword/" + employeeId,{
+fetch("https://employee-leave-system-ajj1.onrender.com/employees/changePassword/" + employeeId,{
 
         method:"PUT",
 
