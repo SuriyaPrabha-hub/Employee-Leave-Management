@@ -4,9 +4,7 @@ window.onload=function(){
 
 let employeeId=localStorage.getItem("employeeId");
 alert("Employee ID = " + employeeId);
-
-fetch("http://localhost:8080/leave/history/"+employeeId)
-
+fetch("https://employee-leave-system-ajj1.onrender.com/leave/history/" + employeeId)
 .then(response=>response.json())
 
 .then(data=>{
