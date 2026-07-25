@@ -2,7 +2,6 @@
 
 A full-stack web application developed using **Spring Boot**, **MySQL**, **HTML**, **CSS**, and **JavaScript** that helps organizations manage employee leave requests efficiently. Employees can apply for leave, while administrators can approve or reject requests through a dedicated dashboard.
 
----
 
 ## 📌 Features
 
@@ -21,7 +20,7 @@ A full-stack web application developed using **Spring Boot**, **MySQL**, **HTML*
 - Approve or Reject Leave Requests
 - Dashboard Statistics
 
----
+
 
 ## 🛠️ Technologies Used
 
@@ -46,7 +45,7 @@ A full-stack web application developed using **Spring Boot**, **MySQL**, **HTML*
 - IntelliJ IDEA / Eclipse
 - Postman
 
----
+
 
 ## 📂 Project Structure
 ```
@@ -98,7 +97,7 @@ leave-management-system/
 ├── mvnw.cmd
 └── README.md
 ```
----
+
 
 ## 📊 Database
 
@@ -113,7 +112,7 @@ Tables:
 - Employee
 - Leave_Request
 
----
+
 
 ## ⚙️ Installation
 
@@ -163,7 +162,7 @@ or
 
 Run the `LeaveApplication.java` file.
 
----
+
 
 ## 🌐 API Endpoints
 
@@ -190,7 +189,6 @@ Run the `LeaveApplication.java` file.
 |---------|----------|-------------|
 | GET | `/admin/dashboard` | Dashboard Statistics |
 
----
 
 ## 🚀 Future Enhancements
 
@@ -201,7 +199,7 @@ Run the `LeaveApplication.java` file.
 - Export Reports (PDF/Excel)
 - Responsive Mobile Design
 
----
+
 
 ## 👨‍💻 Author
 
