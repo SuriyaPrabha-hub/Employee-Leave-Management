@@ -49,6 +49,7 @@ A full-stack web application developed using **Spring Boot**, **MySQL**, **HTML*
 ---
 
 ## 📂 Project Structure
+```
 leave-management-system/
 │
 ├── src/
@@ -96,7 +97,7 @@ leave-management-system/
 ├── mvnw
 ├── mvnw.cmd
 └── README.md
-
+```
 ---
 
 ## 📊 Database
