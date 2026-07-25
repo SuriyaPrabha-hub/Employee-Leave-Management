@@ -120,7 +120,7 @@ Tables:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/employee-leave-management-system.git
+git clone https://github.com/SuriyaPrabha-hub/Employee-Leave-Management.git
 ```
 
 ### 2. Open Project
