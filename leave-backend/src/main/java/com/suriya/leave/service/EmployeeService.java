@@ -3,10 +3,11 @@ package com.suriya.leave.service;
 import com.suriya.leave.entity.Employee;
 import com.suriya.leave.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -16,6 +17,11 @@ public class EmployeeService {
 
     // Add Employee
     public Employee saveEmployee(Employee employee) {
+        // Check for duplicate email before saving
+        if (employeeRepository.findByEmail(employee.getEmail()) != null) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT, "Email already registered. Please use a different email.");
+        }
         return employeeRepository.save(employee);
     }
 
@@ -25,52 +31,77 @@ public class EmployeeService {
     }
 
     // Get Employee By ID
-    public Optional<Employee> getEmployeeById(Integer id) {
-        return employeeRepository.findById(id);
+    public Employee getEmployeeById(Integer id) {
+        return employeeRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Employee not found"));
     }
 
     // Delete Employee
     public void deleteEmployee(Integer id) {
+        if (!employeeRepository.existsById(id)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Employee not found");
+        }
         employeeRepository.deleteById(id);
     }
 
-    // Update Employee
+    // Update Employee (preserves password if not provided)
     public Employee updateEmployee(Integer id, Employee employee) {
+        Employee existing = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Employee not found"));
 
-        Employee existing = employeeRepository.findById(id).orElse(null);
-
-        if (existing != null) {
-            existing.setName(employee.getName());
-            existing.setEmail(employee.getEmail());
-            existing.setPassword(employee.getPassword());
-            existing.setDepartment(employee.getDepartment());
-            existing.setRole(employee.getRole());
-
-            return employeeRepository.save(existing);
+        // Check if new email already used by another employee
+        Employee emailOwner = employeeRepository.findByEmail(employee.getEmail());
+        if (emailOwner != null && !emailOwner.getId().equals(id)) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT, "Email already in use by another employee.");
         }
 
-        return null;
+        existing.setName(employee.getName());
+        existing.setEmail(employee.getEmail());
+        existing.setDepartment(employee.getDepartment());
+        existing.setRole(employee.getRole());
+
+        // Only update password if explicitly provided
+        if (employee.getPassword() != null && !employee.getPassword().isEmpty()) {
+            existing.setPassword(employee.getPassword());
+        }
+
+        return employeeRepository.save(existing);
     }
 
-public Employee login(String email, String password) {
+    // Login
+    public Employee login(String email, String password) {
+        Employee employee = employeeRepository.findByEmail(email);
 
-    Employee employee = employeeRepository.findByEmail(email);
+        if (employee != null && employee.getPassword().equals(password)) {
+            return employee;
+        }
 
-    if (employee != null && employee.getPassword().equals(password)) {
-        return employee;
+        throw new ResponseStatusException(
+                HttpStatus.UNAUTHORIZED, "Invalid email or password");
     }
 
-    return null;
-}
-public Employee changePassword(Integer id, String password) {
+    // Change Password — verifies current password first
+    public Employee changePassword(Integer id, String currentPassword, String newPassword) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Employee not found"));
 
-    Employee employee = employeeRepository.findById(id).orElse(null);
+        // Verify current password
+        if (!employee.getPassword().equals(currentPassword)) {
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED, "Current password is incorrect");
+        }
 
-    if (employee != null) {
-        employee.setPassword(password);
+        if (newPassword == null || newPassword.length() < 4) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "New password must be at least 4 characters");
+        }
+
+        employee.setPassword(newPassword);
         return employeeRepository.save(employee);
     }
-
-    return null;
-}
 }

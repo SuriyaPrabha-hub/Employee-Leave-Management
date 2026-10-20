@@ -1,5 +1,6 @@
 package com.suriya.leave.controller;
 
+import com.suriya.leave.dto.ChangePasswordRequest;
 import com.suriya.leave.entity.Employee;
 import com.suriya.leave.service.EmployeeService;
 import com.suriya.leave.dto.LoginRequest;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/employees")
@@ -34,8 +34,8 @@ public class EmployeeController {
 
 
     // Get Employee By ID
-    @GetMapping("/get/{id}")
-    public Optional<Employee> getEmployeeById(
+    @GetMapping("/{id}")
+    public Employee getEmployeeById(
             @PathVariable Integer id) {
 
         return employeeService.getEmployeeById(id);
@@ -43,7 +43,7 @@ public class EmployeeController {
 
 
     // Update Employee
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public Employee updateEmployee(
             @PathVariable Integer id,
             @RequestBody Employee employee) {
@@ -53,7 +53,7 @@ public class EmployeeController {
 
 
     // Delete Employee
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public String deleteEmployee(
             @PathVariable Integer id) {
 
@@ -86,15 +86,16 @@ public class EmployeeController {
     }
 
 
-    // Change Password
+    // Change Password — requires current password verification
     @PutMapping("/changePassword/{id}")
     public Employee changePassword(
             @PathVariable Integer id,
-            @RequestBody Employee employee) {
+            @RequestBody ChangePasswordRequest request) {
 
         return employeeService.changePassword(
                 id,
-                employee.getPassword()
+                request.getCurrentPassword(),
+                request.getNewPassword()
         );
     }
 }

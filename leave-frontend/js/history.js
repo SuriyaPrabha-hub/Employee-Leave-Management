@@ -1,84 +1,82 @@
-let allLeaves=[];
+let allLeaves = [];
 
-window.onload=function(){
+window.onload = function () {
+    let employeeId = localStorage.getItem("employeeId");
+    let role = localStorage.getItem("role");
 
-let employeeId=localStorage.getItem("employeeId");
-alert("Employee ID = " + employeeId);
-fetch("https://employee-leave-system-ajj1.onrender.com/leave/history/" + employeeId)
-.then(response=>response.json())
+    if (!employeeId) {
+        window.location.href = "index.html";
+        return;
+    }
 
-.then(data=>{
+    // Admins should use their own dashboard
+    if (role === "ADMIN") {
+        window.location.href = "admin.html";
+        return;
+    }
 
-allLeaves=data;
+    fetch(API_BASE + "/leave/history/" + employeeId)
+        .then(response => {
+            if (!response.ok) throw new Error("Failed to load leave history");
+            return response.json();
+        })
+        .then(data => {
+            allLeaves = data;
+            displayLeaves(data);
+        })
+        .catch(err => {
+            console.error(err);
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Unable to load leave history."
+                });
+            }
+        });
+};
 
-displayLeaves(data);
+function displayLeaves(data) {
+    let body = document.getElementById("historyBody");
+    body.innerHTML = "";
 
-});
+    if (!data || data.length === 0) {
+        body.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #64748b;">No leave history found</td></tr>`;
+        return;
+    }
 
+    data.forEach(leave => {
+        let status = (leave.status || "Pending").toLowerCase();
+        let color = "pending";
+
+        if (status === "approved") {
+            color = "approved";
+        } else if (status === "rejected") {
+            color = "rejected";
+        }
+
+        body.innerHTML += `
+        <tr>
+            <td>${leave.leaveType || "-"}</td>
+            <td>${leave.startDate || "-"}</td>
+            <td>${leave.endDate || "-"}</td>
+            <td>${leave.reason || "-"}</td>
+            <td>
+                <span class="status-badge ${color}">
+                    ${leave.status || "Pending"}
+                </span>
+            </td>
+        </tr>
+        `;
+    });
 }
 
-function displayLeaves(data){
-
-let body=document.getElementById("historyBody");
-
-body.innerHTML="";
-
-data.forEach(leave=>{
-
-let color="pending";
-
-if(leave.status==="Approved"){
-
-color="approved";
-
-}
-
-if(leave.status==="Rejected"){
-
-color="rejected";
-
-}
-
-body.innerHTML+=`
-
-<tr>
-
-<td>${leave.leaveType}</td>
-
-<td>${leave.startDate}</td>
-
-<td>${leave.endDate}</td>
-
-<td>${leave.reason}</td>
-
-<td>
-
-<span class="status-badge ${color}">
-
-${leave.status}
-
-</span>
-
-</td>
-
-</tr>
-
-`;
-
-});
-
-}
-
-function searchLeave(){
-
-let keyword=document.getElementById("search").value.toLowerCase();
-
-let filtered=allLeaves.filter(l=>
-
-l.leaveType.toLowerCase().includes(keyword)
-
-);
-
-displayLeaves(filtered);
-
+function searchLeave() {
+    let keyword = document.getElementById("search").value.toLowerCase();
+    let filtered = allLeaves.filter(l =>
+        (l.leaveType && l.leaveType.toLowerCase().includes(keyword)) ||
+        (l.reason && l.reason.toLowerCase().includes(keyword)) ||
+        (l.status && l.status.toLowerCase().includes(keyword))
+    );
+    displayLeaves(filtered);
 }

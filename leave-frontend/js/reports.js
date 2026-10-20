@@ -1,25 +1,29 @@
 window.onload = function () {
+    // Auth check - admin only
+    if (localStorage.getItem("role") !== "ADMIN") {
+        window.location.href = "index.html";
+        return;
+    }
 
-  fetch("https://employee-leave-system-ajj1.onrender.com/leave")
-        .then(response => response.json())
+    fetch(API_BASE + "/leave")
+        .then(response => {
+            if (!response.ok) throw new Error("Failed to fetch leaves");
+            return response.json();
+        })
         .then(data => {
-
             let approved = 0;
             let pending = 0;
             let rejected = 0;
 
             data.forEach(leave => {
-
-                if (leave.status === "Approved") {
+                let status = (leave.status || "").toLowerCase();
+                if (status === "approved") {
                     approved++;
-                }
-                else if (leave.status === "Pending") {
+                } else if (status === "pending") {
                     pending++;
-                }
-                else if (leave.status === "Rejected") {
+                } else if (status === "rejected") {
                     rejected++;
                 }
-
             });
 
             document.getElementById("totalLeaves").innerHTML = data.length;
@@ -28,84 +32,66 @@ window.onload = function () {
             document.getElementById("rejected").innerHTML = rejected;
 
             createChart(approved, pending, rejected);
-
         })
-
-        .catch(() => {
-            alert("Unable to load report");
+        .catch(err => {
+            console.error(err);
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Unable to load reports data."
+                });
+            } else {
+                alert("Unable to load reports data.");
+            }
         });
+};
 
-}
 function createChart(approved, pending, rejected) {
-
-    const ctx = document.getElementById("leaveChart");
+    const canvas = document.getElementById("leaveChart");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
 
     new Chart(ctx, {
-
         type: "bar",
-
         data: {
-
-            labels: [
-                "Approved",
-                "Pending",
-                "Rejected"
-            ],
-
+            labels: ["Approved", "Pending", "Rejected"],
             datasets: [{
-
                 label: "Leave Requests",
-
-                data: [
-                    approved,
-                    pending,
-                    rejected
-                ],
-
+                data: [approved, pending, rejected],
                 backgroundColor: [
                     "#22c55e",
                     "#f59e0b",
                     "#ef4444"
                 ],
-
                 borderRadius: 10,
                 borderSkipped: false,
                 barThickness: 60
-
             }]
-
         },
-
         options: {
-
             responsive: true,
-
             plugins: {
-
                 legend: {
                     display: false
                 },
-
                 title: {
                     display: true,
-                    text: "Leave Status Report"
+                    text: "Leave Status Overview",
+                    font: {
+                        size: 16,
+                        weight: '600'
+                    }
                 }
-
             },
-
             scales: {
-
                 y: {
                     beginAtZero: true,
                     ticks: {
                         stepSize: 1
                     }
                 }
-
             }
-
         }
-
     });
-
 }

@@ -3,7 +3,9 @@ package com.suriya.leave.service;
 import com.suriya.leave.entity.LeaveRequest;
 import com.suriya.leave.repository.LeaveRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -23,38 +25,32 @@ public class LeaveRequestService {
     }
 
     public LeaveRequest approveLeave(Integer id) {
-        LeaveRequest leave = repository.findById(id).orElse(null);
+        LeaveRequest leave = repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Leave request not found"));
 
-        if (leave != null) {
-            leave.setStatus("Approved");
-            return repository.save(leave);
-        }
-
-        return null;
+        leave.setStatus("Approved");
+        return repository.save(leave);
     }
-    public LeaveRequest pendingLeave(Integer id){
 
-    LeaveRequest leave = repository.findById(id).orElse(null);
+    public LeaveRequest pendingLeave(Integer id) {
+        LeaveRequest leave = repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Leave request not found"));
 
-    if(leave != null){
         leave.setStatus("Pending");
         return repository.save(leave);
     }
 
-    return null;
-}
-
     public LeaveRequest rejectLeave(Integer id) {
-        LeaveRequest leave = repository.findById(id).orElse(null);
+        LeaveRequest leave = repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Leave request not found"));
 
-        if (leave != null) {
-            leave.setStatus("Rejected");
-            return repository.save(leave);
-        }
-
-        return null;
+        leave.setStatus("Rejected");
+        return repository.save(leave);
     }
-  
+
     public List<LeaveRequest> getLeaveHistory(Integer employeeId) {
         return repository.findByEmployeeId(employeeId);
     }

@@ -23,7 +23,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 <h2>LeaveHub</h2>
 
-<a href="employee.html"><i class="fa fa-house"></i> Dashboard</a>
+<a id="dashboardLink" href="employee.html"><i class="fa fa-house"></i> Dashboard</a>
 
 <a href="applyleave.html"><i class="fa fa-calendar-plus"></i> Apply Leave</a>
 
@@ -31,7 +31,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 <a href="profile.html"><i class="fa fa-user"></i> Profile</a>
 
-<a href="index.html"><i class="fa fa-right-from-bracket"></i> Logout</a>
+<a href="changepassword.html"><i class="fa fa-key"></i> Change Password</a>
+
+<a href="javascript:void(0)" onclick="logout()"><i class="fa fa-right-from-bracket"></i> Logout</a>
 
 </div>
 
@@ -74,6 +76,7 @@ Save Changes
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/config.js"></script>
 <script src="js/profile.js"></script>
 
 </body>
