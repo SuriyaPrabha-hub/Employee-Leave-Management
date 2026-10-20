@@ -2,7 +2,8 @@ services:
   - type: web
     name: leave-backend
     runtime: docker
-    dockerfilePath: leave-backend/Dockerfile
+    rootDir: leave-backend
+    dockerfilePath: Dockerfile
     plan: free
     region: singapore
     envVars:
