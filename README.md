@@ -2,6 +2,20 @@
 
 A full-stack web application developed using **Spring Boot**, **MySQL**, **HTML**, **CSS**, and **JavaScript** that helps organizations manage employee leave requests efficiently. Employees can apply for leave, while administrators can approve or reject requests through a dedicated dashboard.
 
+## 🌐 Live Demo & Deployment
+
+- **Frontend (Vercel):** [https://employee-leave-management-leave-frontend-sp-f0a4.vercel.app](https://employee-leave-management-leave-frontend-sp-f0a4.vercel.app)
+- **Backend API (Render):** [https://leave-backend-f0c1.onrender.com](https://leave-backend-f0c1.onrender.com/employees)
+- **Database:** Aiven Cloud MySQL
+
+### 🔑 Demo Credentials
+
+| Role | Email | Password |
+|------|-------|----------|
+| **Admin** | `admin@gmail.com` | `admin123` |
+| **Admin (Alternate)** | `admin@leavehub.com` | `admin123` |
+| **Employee** | `suriya@gmail.com` | `password123` |
+
 
 ## 📌 Features
 
